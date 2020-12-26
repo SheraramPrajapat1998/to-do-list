@@ -1,0 +1,6 @@
+.btn{
+  color: black;
+  background-color: gray;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
