@@ -1,34 +1,43 @@
-// import React, { useState } from 'react'
+import React, { useState } from 'react'
+import { FaPlusCircle } from 'react-icons/fa';
 
-// const Form = () => {
-//   const [input, setInput] = useState();
-//   const [todoList, setTodoList] = useState([]);
+const Form = (props) => {
+  const [name, setName] = useState('');
+  
+  const handleChange = (e) => {
+    setName(e.target.value);
+  }
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!name.trim()) {
+      return;
+    }
+    props.addTask(name);
+    setName('');
+  }
+  return (
+    <form
+      className="todoForm"
+      onSubmit={handleSubmit}>
+      <h2 className='todo-heading'>
+        <label htmlFor="new-todo-input">
+          What needs to be done?
+        </label>
+      </h2>
+      <input
+        type="text"
+        id="new-todo-input"
+        name="text"
+        placeholder="Add subtask"
+        value={name}
+        onChange={handleChange}
+      />
+      <button
+        type='submit'
+        className='btn addTask'
+      ><FaPlusCircle /></button>
+    </form>
+  );
+}
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setTodoList([...todoList, input]);
-//     setInput('');
-//   }
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label htmlFor="task">Add a task</label>
-//       <input
-//         type="text"
-//         id='task'
-//         className='task'
-//         onChange={(e) => setInput(e.target.value)}
-//         value={input}
-//       />
-//       <button
-//         type='button'
-//         className='btn'
-//         onClick={handleSubmit}
-//       >
-//         add task
-//       </button>
-//     </form>
-//   )
-// }
-
-// export default Form
+export default Form;

@@ -1,6 +1,133 @@
-.btn{
-  color: black;
-  background-color: gray;
+:root{
+  --color-white: #ffffff;
+  --color-gray: gray;
+}
+*, 
+::before,
+::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #C5CCDC;
+
+}
+h1,
+h2{
+  color: gray;
+  margin-bottom: 0;
+}
+ul{
+  list-style: none;
+  padding: 0;
+}
+
+.box-todo{
+  margin: 1rem auto;
+  color: #8F92A1;
+  width: 50%;
   border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 5px 5px 10px gray;
+  background-color: #FCFCFC;
+  border: none;
+}
+.todoForm input[type="text"]{
+  outline: none;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1rem;
+  font-weight: bolder;
+  letter-spacing: 2px;
+
+}
+.btn{
+  padding: 10px;
+  margin: 0 5px 5px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+.btn.addTask{
+  border: none;
+  color: gray;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+.btn:hover{
+  color: rgb(104, 131, 64);
+}
+
+ul{
+  list-style: none;
+}
+li{
+  padding: 5px 0px;
+}
+input[type="checkbox"]::before{
+  border-radius: 999px;
+}
+.todolist-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4f5781;
+  /* overflow-wrap: break-word; */
+  word-wrap: break-word;
+  /* overflow: hidden; */
+  
+}
+.todo-items{
+  padding: 0 15px;
+  color: var(--color-white);
+}
+.todo-items input[type="checkbox"]:hover, .todo-label{
+  cursor: pointer;
+}
+.line-through{
+  text-decoration: line-through;
+  font-weight: bolder;
+  color: rgb(89, 184, 77);
+}
+
+.todo-label{
+  padding-left: 10px;
   text-transform: capitalize;
+}
+@media screen and (max-width:989px){
+  .box-todo{
+    margin: 1rem auto;
+    color: #8F92A1;
+    width: 90%;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 5px 5px 10px gray;
+    background-color: #FCFCFC;
+    border: none;
+  }
+}
+.btnDelete{
+  color: rgb(212, 82, 82);
+}
+.btnEdit{
+  color: rgb(143, 143, 45);
+}
+.btnDelete:hover{
+  background-color: red;
+}
+.btnEdit:hover{
+  background-color: yellow;
+}
+.btnEdit:hover,
+.btnDelete:hover{
+  color: var(--color-white);
+  outline: none;
+}
+#list-heading{
+  padding: 10px;
+  text-align: center;
+}
+.btn-filter-group{
+  border: 1px solid green;
 }
