@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { FaPencilAlt, FaTimesCircle, FaTrashAlt } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from "react";
+import { FaPencilAlt, FaTimesCircle, FaTrashAlt } from "react-icons/fa";
 
 function usePrevious(value) {
   const ref = useRef();
@@ -9,11 +9,11 @@ function usePrevious(value) {
   return ref.current;
 }
 
-const Todo = (props) => {
-  const { id, name, completed, toggleTaskCompleted, editTask, deleteTask } = props;
+const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
+  const { id, name, completed } = task;
 
   const [isEditing, setEditing] = useState(false);
-  const [newName, setNewName] = useState('');
+  const [newName, setNewName] = useState("");
 
   const editFieldRef = useRef(null);
   const editButtonRef = useRef(null);
@@ -22,7 +22,7 @@ const Todo = (props) => {
 
   const handleChange = (e) => {
     setNewName(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const Todo = (props) => {
     editTask(id, newName);
     setNewName("");
     setEditing(false);
-  }
+  };
 
   const editingTemplate = (
     <form onSubmit={handleSubmit}>
@@ -53,14 +53,11 @@ const Todo = (props) => {
         <button
           type="button"
           className="btn todo-cancel"
-          onClick={()=> setEditing(false)}
+          onClick={() => setEditing(false)}
         >
-          <FaTimesCircle /> <span>remaining { name }</span>
+          <FaTimesCircle /> <span>remaining {name}</span>
         </button>
-        <button
-          type="submit"
-          className="btn todo-edit"
-        >
+        <button type="submit" className="btn todo-edit">
           Save
         </button>
       </div>
@@ -76,14 +73,17 @@ const Todo = (props) => {
           defaultChecked={completed}
           onChange={() => toggleTaskCompleted(id)}
         />
-        <label htmlFor={id} className={`${completed ? "todo-label line-through": "todo-label"}`}>
+        <label
+          htmlFor={id}
+          className={`${completed ? "todo-label line-through" : "todo-label"}`}
+        >
           {name}
         </label>
       </div>
       <div className="btn-group">
         <button
           type="button"
-          className='btn btnEdit'
+          className="btn btnEdit"
           onClick={() => setEditing(true)}
           ref={editButtonRef}
         >
@@ -91,7 +91,7 @@ const Todo = (props) => {
         </button>
         <button
           type="button"
-          className='btn btnDelete'
+          className="btn btnDelete"
           onClick={() => deleteTask(id)}
         >
           <FaTrashAlt />
@@ -109,11 +109,7 @@ const Todo = (props) => {
     }
   }, [wasEditing, isEditing]);
 
-  return (
-    <li className="todo">
-      {isEditing ? editingTemplate : viewTemplate}
-    </li>
-  );
-}
+  return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
+};
 
-export default Todo
+export default Todo;
