@@ -1,5 +1,18 @@
+import {
+  Button,
+  Input,
+  InputLabel,
+  ListItem,
+  ListItemText,
+  Checkbox,
+  FormControl
+} from "@material-ui/core";
+import {
+  CloseRounded,
+  DeleteRounded,
+  EditOutlined,
+} from "@material-ui/icons";
 import React, { useEffect, useRef, useState } from "react";
-import { FaPencilAlt, FaTimesCircle, FaTrashAlt } from "react-icons/fa";
 
 function usePrevious(value) {
   const ref = useRef();
@@ -35,12 +48,12 @@ const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
   };
 
   const editingTemplate = (
-    <form onSubmit={handleSubmit}>
+    <FormControl onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor={id} className="todo-label">
+        <InputLabel htmlFor={id} className="todo-label">
           New name for {name}
-        </label>
-        <input
+        </InputLabel>
+        <Input
           type="text"
           id={id}
           className="todo-text"
@@ -50,52 +63,66 @@ const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
         />
       </div>
       <div className="btn-group">
-        <button
+        <Button
+          variant="contained"
+          color="default"
           type="button"
           className="btn todo-cancel"
           onClick={() => setEditing(false)}
         >
-          <FaTimesCircle /> <span>remaining {name}</span>
-        </button>
-        <button type="submit" className="btn todo-edit">
+          <CloseRounded /> <span>remaining {name}</span>
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={!newName}
+          // className="btn todo-edit"  
+        >
           Save
-        </button>
+        </Button>
       </div>
-    </form>
+    </FormControl>
   );
 
   const viewTemplate = (
     <div className={`todolist-box`}>
       <div className="todo-items">
-        <input
+        <Checkbox
+          color="primary"
           id={id}
           type="checkbox"
           defaultChecked={completed}
           onChange={() => toggleTaskCompleted(id)}
         />
-        <label
+        <InputLabel
+          style={{ display: "inline", padding: "10px 10px" }}
           htmlFor={id}
           className={`${completed ? "todo-label line-through" : "todo-label"}`}
         >
           {name}
-        </label>
+        </InputLabel>
       </div>
       <div className="btn-group">
-        <button
+        <Button
+          variant="contained"
+          color="primary"
           type="button"
           className="btn btnEdit"
           onClick={() => setEditing(true)}
           ref={editButtonRef}
         >
-          <FaPencilAlt />
-        </button>
-        <button
+          <EditOutlined />
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
           type="button"
           className="btn btnDelete"
           onClick={() => deleteTask(id)}
         >
-          <FaTrashAlt />
-        </button>
+          <DeleteRounded />
+        </Button>
       </div>
     </div>
   );
@@ -109,7 +136,13 @@ const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
     }
   }, [wasEditing, isEditing]);
 
-  return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
+  return (
+    <ListItem>
+      <ListItemText className="todo">
+        {isEditing ? editingTemplate : viewTemplate}
+      </ListItemText>
+    </ListItem>
+  );
 };
 
 export default Todo;

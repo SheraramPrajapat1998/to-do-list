@@ -1,3 +1,5 @@
+import { ButtonGroup, IconButton, Link, List } from "@material-ui/core";
+import { GitHub } from "@material-ui/icons";
 import React, { useEffect, useRef, useState } from "react";
 import FilterButton from "./components/FilterButton";
 import Form from "./components/Form";
@@ -20,7 +22,10 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    { name: "task1", id: 1, completed: false },
+    { name: "task2", id: 2, completed: true },
+  ]);
   const [filter, setFilter] = useState("All");
 
   const addTask = (name) => {
@@ -67,7 +72,7 @@ const App = () => {
     ));
 
   const filterList = FILTER_NAMES.map((name) => (
-    <FilterButton key={name} name={name} setFilter={setFilter} />
+    <FilterButton key={name} name={name} setFilter={setFilter} active={name} />
   ));
 
   const taskNoun = taskList.length !== 1 ? "tasks" : "task";
@@ -85,13 +90,32 @@ const App = () => {
   return (
     <div className="box-todo">
       <Form addTask={addTask} />
-      <div className="filters btn-group">{filterList}</div>
+
+      <div className="app__filter-button-group filters btn-group">
+        <ButtonGroup
+          disableElevation
+          size="large"
+          color="secondary"
+          // className='active'
+          // aria-label="outlined secondary button group"
+        >
+          {filterList}
+        </ButtonGroup>
+      </div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
         {headingText}
       </h2>
-      <ul role="list" className="todo-list">
+      <List role="list" className="todo-list">
         {taskList}
-      </ul>
+      </List>
+
+      <div className="github-user">
+        <IconButton color="primary" aria-label="SheraramPrajapat1998">
+          <Link href="https://github.com/SheraramPrajapat1998" target="_blank">
+            <GitHub fontSize="large" />
+          </Link>
+        </IconButton>
+      </div>
     </div>
   );
 };

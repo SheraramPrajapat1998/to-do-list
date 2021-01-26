@@ -131,3 +131,12 @@ input[type="checkbox"]::before{
 .btn-filter-group{
   border: 1px solid green;
 }
+
+.app__filter-button-group{
+  margin: 10px;
+}
+.active{
+  border: 2px solid purple;
+  color: green;
+}
+
