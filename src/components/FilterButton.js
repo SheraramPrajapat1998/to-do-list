@@ -9,7 +9,6 @@ const FilterButton = (props) => {
       color="primary"
       variant="outlined"
       className= {`${active} `}
-      // className="btn toggle-btn btn-filter-group"
       onClick={() => setFilter(name)}
     >
       Show {name} tasks

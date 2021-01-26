@@ -1,25 +1,8 @@
-import {
-  Button,
-  FormControl,
-  IconButton,
-  Input,
-  InputLabel,
-  makeStyles,
-} from "@material-ui/core";
-import { AddCircleRounded, PlusOneRounded } from "@material-ui/icons";
+import { FormControl, IconButton, Input, InputLabel } from "@material-ui/core";
+import { AddCircleRounded } from "@material-ui/icons";
 import React, { useState } from "react";
-// import { FaPlus, FaPlusCircle } from "react-icons/fa";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-}));
 
 const Form = (props) => {
-  const classes = useStyles();
   const [name, setName] = useState("");
 
   const handleChange = (e) => {

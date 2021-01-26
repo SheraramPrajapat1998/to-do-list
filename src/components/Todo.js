@@ -5,13 +5,9 @@ import {
   ListItem,
   ListItemText,
   Checkbox,
-  FormControl
+  FormControl,
 } from "@material-ui/core";
-import {
-  CloseRounded,
-  DeleteRounded,
-  EditOutlined,
-} from "@material-ui/icons";
+import { CloseRounded, DeleteRounded, EditOutlined } from "@material-ui/icons";
 import React, { useEffect, useRef, useState } from "react";
 
 function usePrevious(value) {
@@ -77,7 +73,6 @@ const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
           color="primary"
           type="submit"
           disabled={!newName}
-          // className="btn todo-edit"  
         >
           Save
         </Button>
@@ -90,9 +85,9 @@ const Todo = ({ task, toggleTaskCompleted, editTask, deleteTask }) => {
       <div className="todo-items">
         <Checkbox
           color="primary"
-          id={id}
+          id={id.toString()}
           type="checkbox"
-          defaultChecked={completed}
+          checked={completed}
           onChange={() => toggleTaskCompleted(id)}
         />
         <InputLabel

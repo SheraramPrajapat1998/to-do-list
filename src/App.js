@@ -96,8 +96,6 @@ const App = () => {
           disableElevation
           size="large"
           color="secondary"
-          // className='active'
-          // aria-label="outlined secondary button group"
         >
           {filterList}
         </ButtonGroup>
