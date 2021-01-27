@@ -1,4 +1,15 @@
-import { ButtonGroup, IconButton, Link, List } from "@material-ui/core";
+import {
+  ButtonGroup,
+  createMuiTheme,
+  IconButton,
+  Link,
+  List,
+  Paper,
+  Switch,
+  ThemeProvider,
+  Typography,
+} from "@material-ui/core";
+import { purple } from "@material-ui/core/colors";
 import { GitHub } from "@material-ui/icons";
 import React, { useEffect, useRef, useState } from "react";
 import FilterButton from "./components/FilterButton";
@@ -87,34 +98,60 @@ const App = () => {
     }
   }, [tasks.length, prevTaskLength]);
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: "dark",
+      primary: purple,
+    },
+  });
+  const lightTheme = createMuiTheme({
+    palette: {
+      type: "light",
+    },
+  });
+
   return (
-    <div className="box-todo">
-      <Form addTask={addTask} />
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <Paper style={{ height: "100vh" }}>
+        <div className="toggle-dark-mode">
+          <Typography variant="h6" color="textPrimary">
+            Toggle Dark Mode
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+            />
+          </Typography>
+        </div>
+        <div className="box-todo">
+          <Form addTask={addTask} />
 
-      <div className="app__filter-button-group filters btn-group">
-        <ButtonGroup
-          disableElevation
-          size="large"
-          color="secondary"
-        >
-          {filterList}
-        </ButtonGroup>
-      </div>
-      <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
-        {headingText}
-      </h2>
-      <List role="list" className="todo-list">
-        {taskList}
-      </List>
+          <div className="app__filter-button-group filters btn-group">
+            <ButtonGroup disableElevation size="large" color="secondary">
+              {filterList}
+            </ButtonGroup>
+          </div>
+          <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
+            {headingText}
+          </h2>
+          <List role="list" className="todo-list">
+            {taskList}
+          </List>
 
-      <div className="github-user">
-        <IconButton color="primary" aria-label="SheraramPrajapat1998">
-          <Link href="https://github.com/SheraramPrajapat1998" target="_blank">
-            <GitHub fontSize="large" />
-          </Link>
-        </IconButton>
-      </div>
-    </div>
+          <div className="github-user">
+            <IconButton color="primary" aria-label="SheraramPrajapat1998">
+              <Link
+                href="https://github.com/SheraramPrajapat1998"
+                target="_blank"
+              >
+                <GitHub fontSize="large" />
+              </Link>
+            </IconButton>
+          </div>
+        </div>
+      </Paper>
+    </ThemeProvider>
   );
 };
 

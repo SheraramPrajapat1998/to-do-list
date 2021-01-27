@@ -7,8 +7,7 @@ const FilterButton = (props) => {
     <Button
       type="button"
       color="primary"
-      variant="outlined"
-      className= {`${active} `}
+      variant="contained"
       onClick={() => setFilter(name)}
     >
       Show {name} tasks
